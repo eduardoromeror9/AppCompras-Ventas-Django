@@ -19,3 +19,22 @@ class Categoria(ClaseModelo):
 
     class Meta:
         verbose_name_plural = 'Categorias'
+        
+
+class SubCategoria(ClaseModelo):
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    descripcion = models.CharField(
+        max_length = 100,
+        help_text = 'Descripcion de la subcategoria',
+    )
+
+    def __str__(self):
+        return f'{self.categoria.descripcion}:{self.descripcion}'
+
+    def save(self):
+        self.descripcion = self.descripcion.upper()
+        super(SubCategoria, self).save()
+
+    class Meta:
+        verbose_name_plural = 'Subcategorias'
+        unique_together = ('categoria', 'descripcion')

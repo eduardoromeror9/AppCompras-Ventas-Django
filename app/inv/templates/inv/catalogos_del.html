@@ -1,5 +1,4 @@
 {% extends 'base/base.html' %}
-
 {% block page_content %}
 
 <form method="POST" class="form-inline">
@@ -13,7 +12,7 @@
               Eliminar {{ obj.descripcion }}?
             </div>
             <button class="btn btn-danger" type="submit"><i class="far fa-question-circle fa-2x text-gray-300"></i>Si, Eliminar!</button>
-            {% comment %} <a class="btn btn-success" href="{% url 'inv:categoria_list' %}"><span class="fa fa-undo"></span>No, Cancelar!</a> {% endcomment %}
+            <!-- <a class="btn btn-success" href="{% url 'inv:categoria_list' %}"><span class="fa fa-undo"></span>No, Cancelar!</a> -->
             <a class="btn btn-success" href="{{ request.META.HTTP_REFERER }}"><span class="fa fa-undo"></span>No, Cancelar!</a>
           </div>
           <div class="col-auto">
@@ -25,8 +24,6 @@
   </div>
 </form>
 
-
 {% endblock page_content %}
-
 {% block js_page %}
 {% endblock js_page %}

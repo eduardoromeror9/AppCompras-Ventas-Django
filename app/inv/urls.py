@@ -1,11 +1,11 @@
 from django.urls import path
 
 from .views import (CategoriaDel, CategoriaEdit, CategoriaNew, CategoriaView,
-                    MarcaEdit, MarcaNew, MarcaView, SubCategoriaDel,
-                    SubCategoriaEdit, SubCategoriaNew, SubCategoriaView,
-                    marca_inactivar, UMEdit, UMNew, UMView, um_inactivar,
-                    ProductoView, ProductoEdit, ProductoNew, producto_inactivar
-                )
+                MarcaEdit, MarcaNew, MarcaView, SubCategoriaDel,
+                SubCategoriaEdit, SubCategoriaNew, SubCategoriaView,
+                marca_inactivar, UMEdit, UMNew, UMView, um_inactivar,
+                ProductoView, ProductoEdit, ProductoNew, producto_inactivar
+            )
 
 urlpatterns = [
     path('categorias/', CategoriaView.as_view(), name='categoria_list'),

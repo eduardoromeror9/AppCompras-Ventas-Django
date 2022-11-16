@@ -29,7 +29,7 @@ class SubCategoria(ClaseModelo):
     )
 
     def __str__(self):
-        return f'{self.categoria.descripcion}:{self.descripcion}'
+        return f'{self.categoria.descripcion}: {self.descripcion}'
 
     def save(self):
         self.descripcion = self.descripcion.upper()

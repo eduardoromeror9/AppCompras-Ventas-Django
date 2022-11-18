@@ -5,23 +5,23 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Proveedor
-from cmp.forms import ProveedorForm
+from amp.forms import ProveedorForm
 
 
 # Create your views here.
 class ProveedorView(LoginRequiredMixin, generic.ListView):
     model = Proveedor
-    template_name = 'cmp/proveedor_list.html'
+    template_name = 'amp/proveedor_list.html'
     context_object_name = 'obj'
     login_url = 'bases:login'
     
     
 class ProveedorNew(LoginRequiredMixin, generic.CreateView):
     model = Proveedor
-    template_name = 'cmp/proveedor_form.html'
+    template_name = 'amp/proveedor_form.html'
     context_object_name = 'obj'
     form_class = ProveedorForm
-    success_url = reverse_lazy('cmp:proveedor_list')
+    success_url = reverse_lazy('amp:proveedor_list')
     login_url = 'bases:login'
     
     def form_valid(self, form):
@@ -32,13 +32,19 @@ class ProveedorNew(LoginRequiredMixin, generic.CreateView):
     
 class ProveedorEdit(LoginRequiredMixin, generic.UpdateView):
     model = Proveedor
-    template_name = 'cmp/proveedor_form.html'
+    template_name = 'amp/proveedor_form.html'
     context_object_name = 'obj'
     form_class = ProveedorForm
-    success_url = reverse_lazy('cmp:proveedor_list')
+    success_url = reverse_lazy('amp:proveedor_list')
     login_url = 'bases:login'
     
     def form_valid(self, form):
         form.instance.um = self.request.user.id
         print(self.request.user.id)
         return super().form_valid(form)
+    
+    
+def proveedor_inactivar(request, id):
+    template_name = 'amp/inactivar_prv.html'
+    contexto = {}
+    return render(request, template_name, contexto)

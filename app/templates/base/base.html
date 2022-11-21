@@ -25,6 +25,9 @@
     <!-- Custom styles for this page -->
     <link href="{% static 'base/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 
+    <!-- JQUERY Confirm -->
+    <link href="{% static 'base/vendor/jquery_confirm/jquery-confirm.min.css' %}" rel="stylesheet">
+
 </head>
 
 <body id="page-top" class="bg-gradient-primary">
@@ -452,7 +455,8 @@
     <script src="{% static 'base/vendor/datatables/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'base/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
 
-    {% block js_page %} {% endblock js_page %}
+    <script src="{% static 'base/vendor/jquery_confirm/jquery-confirm.min.js' %}"></script>
+
 
     {% block control_modal %} 
       <script>
@@ -471,6 +475,15 @@
           return false;
         }
 
+        function mensaje(msg, color='green'){
+          $.alert({
+            title: '',
+            theme: 'material',
+            type: color,
+            content: msg,
+          });
+        }
+
         // $(document).on('click', '.modal', function (e) {
         //   if (e.target == this) {
         //     cerrar_modal();
@@ -478,6 +491,8 @@
         // }); Para cerrar el modal haciendo click fuera de el
       </script>
     {% endblock control_modal %}
+    {% block js_page %} {% endblock js_page %}
+
 </body>
 
 </html>

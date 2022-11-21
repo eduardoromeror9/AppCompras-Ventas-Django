@@ -229,7 +229,7 @@ class ProductoEdit(LoginRequiredMixin, generic.UpdateView):
 
 def producto_inactivar(request, id):
     prod = Producto.objects.filter(pk = id).first()
-    contexto = {}
+    contexto = {} # Se envia al template para mostrar los datos del objeto a eliminar (obj)
     template_name = "inv/catalogos_del.html"
     
     if not prod:

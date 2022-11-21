@@ -10,11 +10,8 @@
                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                   Inactivar? {{ obj.descripcion }}?
                 </div>
-                <button class="btn btn-danger" type="button"><i
-                    class="far fa-question-circle fa-2x text-gray-300"></i>Si, Inactivar!</button>
-                <button type="button" class="btn btn-success" onclick="return cerrar_modal()">
-                  <i class="far fa-check-circle fa-2x text-gray-300"></i>No, Cancelar!
-                </button>
+                <button type="button" class="btn btn-danger" id="btnInactivar"><i class="far fa-question-circle"></i>Si, Inactivar!</button>
+                <button type="button" class="btn btn-success" onclick="return cerrar_modal()">No, Cancelar!</button>
               </div>
               <div class="col-auto">
                 <i class="far fa-question-circle fa-2x text-gray-300"></i>
@@ -26,3 +23,44 @@
     </form>
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+
+    var token = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                xhr.setRequestHeader("X-CSRFToken", token);
+            }
+        }
+    });
+
+    $("#btnInactivar").click(function(e){
+      e.preventDefault();
+
+      var id = {{ obj.id }};
+      var template="{% url 'amp:proveedor_inactivar' obj.id %}";
+      var data = {"id":id};
+      data = JSON.stringify(data);
+
+      $.ajax({
+        type: "POST",
+        url: template,
+        data: data,
+        beforeSend: function( xhr, settings ) {
+          $.ajaxSettings.beforeSend(xhr, settings);
+        },
+        success: function(response){
+          console.log(response);
+          cerrar_modal();
+          alert(response);
+        },
+        error: function(jqXHR, textStatus, errorThrow){
+          console.log(textStatus, errorThrow);
+          cerrar_modal();
+        }
+      });
+    });
+  });
+</script>

@@ -9,7 +9,7 @@ from django.http import HttpResponse
 import json
 
 
-from .models import Proveedor
+from .models import Proveedor, ComprasEnc, ComprasDet
 from amp.forms import ProveedorForm
 from bases.views import SinPrivilegios
 
@@ -72,3 +72,10 @@ def proveedor_inactivar(request, id):
     
     
     return render(request, template_name, contexto)
+
+
+class ComprasView(SinPrivilegios, generic.ListView):
+    model = ComprasEnc
+    template_name = 'amp/compras_list.html'
+    context_object_name = 'obj'
+    permission_required = 'amp.view_comprasenc'
